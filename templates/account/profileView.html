@@ -1,0 +1,58 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <h3>Welcome {{request.user}}</h3>
+  <div class="col-sm-2 border-end">
+   <ul class="list-unstyled">
+   <li class="d-grid"><a href="{% url 'profile' %}" class="{{active}}">Profile</a></li>
+    <li class="d-grid"><a href="{% url 'profile_update' %}" class="btn">Update Profile</a></li>
+        <li class="d-grid"><a href="{% url 'add-address' %}" class="btn">Add Adress</a></li>
+    <li class="d-grid"><a href="{% url 'view-address' %}" class="btn">View Address</a></li>
+   </ul>
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+   
+    <table border="3px" class="table table-striped">
+     
+        <tr>
+            <td colspan="4" align="center"><h2> Profile Detail </h2></td>
+        </tr>
+
+        <tr>   
+            <td ><h4>First Name  : </45></td>
+            <td><h4>{{data.user.first_name}}</h4></td> 
+        </tr>
+
+        <tr>   
+            <td ><h4> Last Name  : </45></td>
+            <td><h4>{{data.user.last_name}}</h4></td> 
+        </tr>
+
+        <tr>   
+            <td ><h4>Email  : </45></td>
+            <td><h4>{{data.user.email}}</h4></td> 
+        </tr>
+
+        <tr>   
+            <td ><h4> Mobile Number  : </45></td>
+            <td><h4>{{data.mobile_number}}</h4></td> 
+        </tr>
+
+        <tr>   
+            <td ><h4> Date Of Birth </45></td>
+            <td><h4>{{data.date_of_birth}}</h4></td> 
+        </tr>
+
+        <tr>   
+            <td ><h4>Profile Image</45></td>
+
+            <td><h4><img style="height: 200px; width: 200px;" src="{{data.profile_image.url}}" alt="" height="200px"></h4></td> 
+        </tr>
+    </table>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

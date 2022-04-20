@@ -1,0 +1,28 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+{% block title %}Product Detail{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+ {{car}}
+ {% for pro in car %}
+ 
+ 
+ 
+ for pro in car.product
+  <div class="col-sm-6 text-center align-self-center">
+   <img src={{pro.image.url}} alt="" class="img-fluid img-thumbnail">
+  </div>
+  <div class="col-sm-5 offset-sm-1">
+   <h2>Product Name : {{pro.product.name}}</h2>
+   <hr>
+   <p>{{pro.product.description}}</p> <br>
+   <h4>Rs. {{pr.product.discount_price}}  <small class="fw-light text-decoration-line-through">Rs.{{pro.selling_price}}</small></h4> <br>
+   <a href="{% url 'add-to-cart' pro.id  %}" class="btn btn-primary shadow px-5 py-2">Add to Cart</a>
+   <a href="" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
+   
+  </div>
+ </div>
+  {% endfor %}
+</div>
+{% endblock main-content %}

@@ -1,0 +1,61 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container">
+ <div class="row mt-5">
+  <div class="col-sm-6">
+    <h4>Order Summary</h4>
+    <hr>
+    {% for i in cart %}
+    <h3>Cart {{forloop.counter}}</h3>
+    <div class="row">
+     <div class="col-sm-2 text-center align-self-center"><img src="{{i.product.image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="150" width="150"> </div>
+     <div class="col-sm-9">
+      <div>
+       <h5>Product 1</h5>
+       <p class="mb-1 text-muted small">price : Rs{{i.product.selling_price}}/item</p>
+       <div class="my-2">
+        <label for="quantity">Quantity:</label>
+          <span id="quantity">{{i.quantity}}</span>
+       </div> 
+       <div class="d-flex justify-content-between">
+        <p class="mb-0"><span><strong>Rs.{{i.total_cost}} </strong></span></p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <hr class="text-muted">
+    {% endfor %}
+    <p><h5>Total amount + Shipping charge</h5><h6> ==> Rs.{{total_amount}}</h6></p>
+      
+    <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
+  </div>
+  <div class="col-sm-4 offset-sm-1">
+    <h4>Select Shipping Address</h4>
+    <hr>
+    <form action="/order_placed/">
+    {% for i in address %}
+    
+    
+      <div class="card">
+        <div class="card-body">
+        <h5><strong>Name : </strong>{{i.user}}</h5>
+        <p><strong>locality :</strong>{{i.locality}} <br><strong>City : </strong>{{i.city}} <br>  , <strong>Country : </strong>{{i.state}} ,<strong>Zipcode</strong>{{i.zipcode}} </p>
+        <p></p>
+        </div>
+      </div>
+        <div class="form-check mt-2 mb-5">
+          <input class="form-check-input" type="radio" name="cusid" id="cusadd{{forloop.counter}}" value="{{i.id}}">
+          <label class="form-check-label fw-bold" for="cusadd{{forloop.counter}}">
+            Address: {{forloop.counter}} </label>
+        </div>
+        {% endfor %}
+        <div class="text-end">
+          <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}
