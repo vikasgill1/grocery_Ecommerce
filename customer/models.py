@@ -18,6 +18,10 @@ class Product(models.Model):
     discount_price=models.FloatField()
     def __str__(self):
         return self.name
+    @property
+    def discount_percentage(self):
+        discount=(100*(self.selling_price-self.discount_price))/self.selling_price
+        return discount
 
 class Favorite(models.Model):
     user=models.ForeignKey(UserAccount,on_delete=models.CASCADE)

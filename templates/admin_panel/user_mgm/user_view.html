@@ -1,0 +1,84 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+{% block title %}Dasboard{% endblock title %}
+{% block main-content %}
+<div class="container my-3">
+ <div class="row">
+  
+  <div class="col-sm-3  bg-dark"  id="navbarToggleExternalContent" style="height:100%;">
+  <h2 class="bg-warning" align='center'> <strong>Dasboard</strong> </h2>
+   <ul class="list-unstyled">
+     
+    <li class="d-grid my-3"><a href="{% url 'user-view' %}"  class="btn btn-warning">User Management </a></li>
+   
+    <li class="d-grid my-3"><a href="{% url 'cate-view' %}" class="btn btn-warning" >Category Management</a></li>
+  
+    <li class="d-grid my-3"><a href="{% url 'prod-view' %}"  class="btn btn-warning">Product Management</a></li>
+  
+    <li class="d-grid my-3"><a href="{% url 'ord-view' %}"  class="btn btn-warning" >Order Management</a></li>
+
+   </ul>
+   </div>
+   <div class="col-sm-9 col-md">
+    <table border="3px" class="table table-striped">
+     
+        <tr class='bg-success'>
+            <td colspan="10" align="center"><h2> User Profile </h2></td>
+        </tr>
+          <tr>
+            <th>S.No</th>
+            <th> I.D </th>
+            <th> UserName</th>
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> Email  </th>
+            <th> Mobile Number</th>
+            <th> DOB </th>
+            <th> Profle Image</th>
+            <th colspan="2" align="center" ><button> Edit Profile</button></th>
+           
+          </tr>
+
+
+        {% for data in data %}
+         <tr>   
+            <td>{{forloop.counter}}</td> 
+            <td>{{data.id}}</td> 
+            <td>{{data.user.username}}</td> 
+            <td>{{data.user.first_name}}</td> 
+            <td>{{data.user.last_name}}</td> 
+            <td>{{data.user.email}}</td> 
+            <td>{{data.mobile_number}}</td> 
+            <td>{{data.date_of_birth}}</td> 
+            {% if data.profile_image %}
+            <td><h4><img style="height: 40px; width: 40px;" src="{{data.profile_image.url}}" alt="" ></h4></td>
+            {% else %}
+            <td><h4><img style="height: 40px; width: 40px;" src="" alt="" ></h4></td>
+            {% endif %}
+            {% if data.user.is_active == True %}
+            <td><a href="{% url 'user-status' data.user.id %}" class="btn btn-primary">Block</a></td>
+            {% else %}
+            <td><a href="{% url 'user-status' data.user.id %}" class="btn btn-primary">Unblock</a></td>
+            {% endif %}
+            
+            <td><a href="{% url 'user-delete' data.user.id %}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+      
+    </table>
+  </div>
+  </div>
+  
+  
+ </div>
+
+</div>
+
+
+
+{% endblock main-content %}
+
+
+
+
+

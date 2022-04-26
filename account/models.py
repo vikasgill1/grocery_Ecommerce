@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals  import post_save
+from django.dispatch import receiver
 # Create your models here.
 
 USER_TYPE=(('customer','customer'),('admin','admin'))
@@ -31,9 +33,18 @@ class UserAddress(models.Model):
         return str(self.country)
 
 
-
-
-
-
-
-
+@receiver(post_save, sender=User)
+def update_customer_settings(sender, instance, created, **kwargs):
+    if instance.is_superuser == True :
+        if created:
+            pd=UserAccount()
+            pd.user=instance
+            pd.user_type='admin'
+            pd.save()
+    else:
+        if created:
+                pd=UserAccount()
+                pd.user=instance
+                pd.user_type='customer'
+                pd.save()
+        

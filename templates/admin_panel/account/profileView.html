@@ -1,0 +1,80 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+{% block title %}Dasboard{% endblock title %}
+{% block main-content %}
+<div class="container my-3">
+ <div class="row">
+  
+  <div class="col-sm-3  bg-dark"  id="navbarToggleExternalContent" style="height:100%;">
+  <h2 class="bg-warning" align='center'> <strong>Dasboard</strong> </h2>
+   <ul class="list-unstyled">
+     
+    <li class="d-grid my-3"><a href="{% url 'user-view' %}"  class="btn btn-warning">User Management </a></li>
+   
+    <li class="d-grid my-3"><a href="{% url 'cate-view' %}" class="btn btn-warning" >Category Management</a></li>
+  
+    <li class="d-grid my-3"><a href="{% url 'prod-view' %}"  class="btn btn-warning">Product Management</a></li>
+  
+    <li class="d-grid my-3"><a href="{% url 'ord-view' %}"  class="btn btn-warning" >Order Management</a></li>
+
+   </ul>
+   </div>
+   <div class="col-sm ">
+    <table border="3px" class="table table-striped">
+     
+        <tr>
+            <td colspan="4" align="center"><h2> Profile Detail </h2></td>
+            <td><a href="{% url 'admin-profile-edit' %}" class="btn btn-primary">Edit</a></td>
+        </tr>
+
+        <tr>   
+            <td ><h4>First Name  : </45></td>
+            <td><h4>{{data.user.first_name}}</h4></td> 
+        </tr>
+
+        <tr>   
+            <td ><h4> Last Name  : </45></td>
+            <td><h4>{{data.user.last_name}}</h4></td> 
+        </tr>
+
+        <tr>   
+            <td ><h4>Email  : </45></td>
+            <td><h4>{{data.user.email}}</h4></td> 
+        </tr>
+
+        <tr>   
+            <td ><h4> Mobile Number  : </45></td>
+            <td><h4>{{data.mobile_number}}</h4></td> 
+        </tr>
+
+        <tr>   
+            <td ><h4> Date Of Birth </45></td>
+            <td><h4>{{data.date_of_birth}}</h4></td> 
+        </tr>
+        {% if data.profile_image %}
+        
+        
+        
+        <tr>   
+            <td ><h4>Profile Image</45></td>
+
+            <td><h4><img style="height: 200px; width: 200px;" src="{{data.profile_image.url}}" alt="" height="200px"></h4></td> 
+        </tr>
+        {% endif %}
+    </table>
+  </div>
+  </div>
+  
+  
+ </div>
+
+</div>
+
+
+
+{% endblock main-content %}
+
+
+
+
+

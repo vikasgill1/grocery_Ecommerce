@@ -6,6 +6,8 @@ from django.shortcuts import render
 from .models import Product,Category,Cart,Order
 from account.models import UserAccount,UserAddress
 
+from django.db.models import Q
+
 # def home(request):
 #     return render(request, 'customer/home.html')
 
@@ -35,7 +37,7 @@ class Product_Cate_detail(View):
 
 class Search(View):
     def get(self,request):
-        pro= Product.objects.filter(name=request.POST.get('data'))
+        pro= Category.objects.filter(Q(name=request.POST.get('data'))  | Q(product__name=request.POST.get('data')))
 
 def Add_to_cart(request,pk):
     pro=Product.objects.get(pk=pk)

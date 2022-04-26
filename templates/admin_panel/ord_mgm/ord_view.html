@@ -1,0 +1,107 @@
+my name is vikas gill{% extends 'admin_panel/base.html' %}
+{% load static %}
+{% block title %}Dasboard{% endblock title %}
+{% block main-content %}
+<div class="container my-3">
+ <div class="row">
+  
+  <div class="col-sm-3  bg-dark"  id="navbarToggleExternalContent" style="height:100%;">
+  <h2 class="bg-warning" align='center'> <strong>Dasboard</strong> </h2>
+   <ul class="list-unstyled">
+     
+    <li class="d-grid my-3"><a href="{% url 'user-view' %}"  class="btn btn-warning">User  Management </a></li>
+   
+    <li class="d-grid my-3"><a href="{% url 'cate-view' %}" class="btn btn-warning" >Category Management</a></li>
+  
+    <li class="d-grid my-3"><a href="{% url 'prod-view' %}"  class="btn btn-warning">Product Management</a></li>
+  
+    <li class="d-grid my-3"><a href="{% url 'ord-view' %}"  class="btn btn-primary" >Order Management</a></li>
+
+   </ul>
+   </div>
+   <div class="col-sm-6 col-md ">
+    <table border="3px" class="table table-striped">
+    <form method="GET">
+        <tr>
+            <td colspan="" align="center"><button name="alldatabtn" type="submit" class="btn btn-info">All Order</button></td>
+            <td colspan="2" align="center"><button name="pendingbtn" type="submit" class="btn btn-info">Pending Order</button></td>
+            <td colspan="" align="center"><button name="Acceptbtn" type="submit" class="btn btn-info">Accept Order</button></td>
+            <td colspan="" align="center"><button name="Packedbtn" type="submit" class="btn btn-info">Packed Order</button></td>
+            <td colspan="2" align="center"><button name="waybtn" type="submit" class="btn btn-info">On the Way Order</button></td>
+            <td colspan="2" align="center"><button name="Deliveredbtn" type="submit" class="btn btn-info">Delivered Successfully Order</button></td>
+            <td colspan="" align="center"><button name="Cancelbtn" type="submit" class="btn btn-info">Cancel Order</button></td>
+        </tr>
+    </form>
+        <tr class="bg-warning">
+            <td colspan="10" align="center"><h2>{{order}}</h2></td>
+        </tr>
+     
+        <tr class="bg-success">
+            <td colspan="10" align="center"><h2>Order Management</h2></td>
+        </tr>
+
+        <tr>   
+            <td >S.No</td>
+            <td >ID</td>
+            <td >User</td>
+            <td >Product</td>
+            <td >Customer</td>
+            <td >Quantity</td>
+            <td >Total Amount</td>
+            <td >Order_date</td>
+            <td class='bg-info'>Change status</td>
+            <td class='bg-info' >Cancel order</td>   
+            
+        </tr>
+    {% for i  in data %}
+    
+    
+        <tr>   
+            <td >{{forloop.counter}}</td>
+            <td>{{i.id}}</td> 
+            <td>{{i.user}}</td> 
+            <td>{{i.product}}</td> 
+            <td>{{i.customer}}</td>
+            <td>{{i.quantity}}</td> 
+            <td>{{i.total_cost}}</td> 
+            <td>{{i.order_date}}</td>
+            {% if i.status == 'Delivered' %}
+            <td><button href="" class="btn btn-success">order Delivered successfully</button></td>
+            {% elif  i.status == 'Cancel' %}
+            <td><button href="" class="btn btn-success">order Cancel</button></td>
+            {% else %}
+            <td ><a href="{% url 'ord-update' i.id %}" class="btn btn-primary">{{i.status}}</a></td>
+            
+            {% endif %}
+            {% if i.status == 'Delivered' %}
+            <td><button href="" class="btn btn-success">order Delivered successfully</button></td>
+            {% elif  i.status == 'Cancel' %}
+            <td><button href="" class="btn btn-success">order Cancel</button></td>
+            {% else %}
+            <td ><a href="{% url 'ord-cancel' i.id %}" class="btn btn-danger">Cancel</a></td>
+            
+            {% endif %}
+
+        </tr>
+    {% endfor %}
+
+        
+    </table>
+  </div>
+  </div>
+  
+  
+ </div>
+
+</div>
+
+
+
+{% endblock main-content %}
+
+
+
+
+
+
+

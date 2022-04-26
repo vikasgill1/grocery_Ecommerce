@@ -45,12 +45,16 @@
             <td ><h4> Date Of Birth </45></td>
             <td><h4>{{data.date_of_birth}}</h4></td> 
         </tr>
-
+        {% if data.profile_image %}
+        
+        
+        
         <tr>   
             <td ><h4>Profile Image</45></td>
 
             <td><h4><img style="height: 200px; width: 200px;" src="{{data.profile_image.url}}" alt="" height="200px"></h4></td> 
         </tr>
+        {% endif %}
     </table>
   </div>
  </div>

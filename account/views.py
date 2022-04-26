@@ -34,15 +34,17 @@ class profileUpdate(View):
         return render(request, 'account/profileEdit.html',context={'form':form,'active':'btn btn-primary'})
     def post(self,request):
         pro=UserAccount.objects.get(user=request.user)
-        form=Profileform(request.POST,instance=pro)
+        form=Profileform(request.POST,request.FILES ,instance=pro, )
         if form.is_valid():
+            form.save()
             first_name=form.cleaned_data['first_name']
             last_name=form.cleaned_data['last_name']
             email=form.cleaned_data['email']
             gender=form.cleaned_data['gender']
             date_of_birth=form.cleaned_data['date_of_birth']
             mobile_number=form.cleaned_data['mobile_number']
-            profile_image=form.cleaned_data['profile_image']
+            profile_image=form.cleaned_data.get('profile_image')
+            print(profile_image)
             res=UserAccount.objects.get(user=request.user)
             res.gender=gender
             res.date_of_birth=date_of_birth

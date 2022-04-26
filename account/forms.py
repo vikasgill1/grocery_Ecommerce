@@ -16,13 +16,7 @@ class CustomerRegistrationForm(UserCreationForm):
         model=User
         fields=('username','email','password1','password2')
 
-    @receiver(post_save, sender=User)
-    def update_customer_settings(sender, instance, created, **kwargs):
-        if created:
-            pd=UserAccount()
-            pd.user=instance
-            pd.user_type='customer'
-            pd.save()
+    
 
 class Loginform(AuthenticationForm):
     username=UsernameField(max_length=30, required=True,label='Username',widget=forms.TextInput(attrs={'autofocus':True,'class':'form-control'}))
@@ -61,7 +55,7 @@ class Profileform(forms.ModelForm):
     email=forms.EmailField(max_length=30, required=True,label='Email',widget=forms.EmailInput(attrs={'class':'form-control'}))
     date_of_birth=forms.DateField(required=True,label='DOB',widget=forms.TextInput(attrs={'class':'form-control'}))
     gender=forms.ChoiceField(choices=GENDER_TYPE,required=True,label='Gender')
-    # profile_image=forms.ImageField(required=True,label='Profile Image')
+    profile_image=forms.ImageField(required=True,label='Profile Image')
 
     class Meta:
         model=UserAccount
